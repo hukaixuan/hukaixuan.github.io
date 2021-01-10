@@ -3,26 +3,57 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/posts/my-first-post/</loc>
-    <lastmod>2021-01-06T12:11:50+08:00</lastmod>
+    <loc>https://hukx.site/categories/</loc>
+    <lastmod>2020-08-10T01:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
-    <lastmod>2021-01-06T12:11:50+08:00</lastmod>
+    <loc>https://hukx.site/</loc>
+    <lastmod>2020-10-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/posts/</loc>
-    <lastmod>2021-01-06T12:11:50+08:00</lastmod>
+    <loc>https://hukx.site/posts/example-post/</loc>
+    <lastmod>2020-08-10T01:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://hukx.site/posts/</loc>
+    <lastmod>2020-08-10T01:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://hukx.site/tags/</loc>
+    <lastmod>2020-08-10T01:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hukx.site/tags/test/</loc>
+    <lastmod>2020-08-10T01:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hukx.site/categories/test/</loc>
+    <lastmod>2020-08-10T01:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hukx.site/archives/</loc>
+    <lastmod>2019-05-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hukx.site/page/</loc>
+    <lastmod>2020-10-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hukx.site/about/</loc>
+    <lastmod>2020-10-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hukx.site/search/</loc>
   </url>
   
 </urlset>
