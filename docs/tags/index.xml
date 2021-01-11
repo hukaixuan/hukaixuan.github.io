@@ -9,11 +9,20 @@
     <copyright>Hukx - All rights reserved</copyright>
     <lastBuildDate>Mon, 10 Aug 2020 01:00:00 +0200</lastBuildDate><atom:link href="https://hukx.site/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Test</title>
-      <link>https://hukx.site/tags/test/</link>
+      <title>Django</title>
+      <link>https://hukx.site/tags/django/</link>
       <pubDate>Mon, 10 Aug 2020 01:00:00 +0200</pubDate>
       
-      <guid>https://hukx.site/tags/test/</guid>
+      <guid>https://hukx.site/tags/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ORM</title>
+      <link>https://hukx.site/tags/orm/</link>
+      <pubDate>Mon, 10 Aug 2020 01:00:00 +0200</pubDate>
+      
+      <guid>https://hukx.site/tags/orm/</guid>
       <description></description>
     </item>
     

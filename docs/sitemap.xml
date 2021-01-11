@@ -8,12 +8,22 @@
   </url>
   
   <url>
+    <loc>https://hukx.site/tags/django/</loc>
+    <lastmod>2020-08-10T01:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://hukx.site/</loc>
     <lastmod>2020-10-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://hukx.site/posts/example-post/</loc>
+    <lastmod>2020-08-10T01:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hukx.site/tags/orm/</loc>
     <lastmod>2020-08-10T01:00:00+02:00</lastmod>
   </url>
   
@@ -28,12 +38,7 @@
   </url>
   
   <url>
-    <loc>https://hukx.site/tags/test/</loc>
-    <lastmod>2020-08-10T01:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hukx.site/categories/test/</loc>
+    <loc>https://hukx.site/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/</loc>
     <lastmod>2020-08-10T01:00:00+02:00</lastmod>
   </url>
   
