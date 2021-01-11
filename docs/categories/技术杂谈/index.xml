@@ -7,14 +7,14 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>Hukx - All rights reserved</copyright>
-    <lastBuildDate>Mon, 10 Aug 2020 01:00:00 +0200</lastBuildDate><atom:link href="https://hukx.site/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Oct 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://hukx.site/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My First Post</title>
-      <link>https://hukx.site/posts/example-post/</link>
-      <pubDate>Mon, 10 Aug 2020 01:00:00 +0200</pubDate>
+      <title>Django ORM 剖析</title>
+      <link>https://hukx.site/posts/description-of-django-orm/</link>
+      <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://hukx.site/posts/example-post/</guid>
-      <description>First Post 哈哈哈</description>
+      <guid>https://hukx.site/posts/description-of-django-orm/</guid>
+      <description>ORM实现组成  Model Manager QuerySet Query SQLCompiler Database backend  DATABASE BACKENDS  基类实现及支持的数据库的各自实现（django/db/models/backends） 具体采用的是哪种实现依据数据库配置里面的ENGINE ORM的底层行为的实现 介于Django与DB driver模块之间  Databasewrapper  django.db.backends.base.BaseDatabasewrapper，其他数据库的实现继承自该类，代表一条数据库连接 实现以下内容：  connection管理、cursor管理 事务管理 定义当前数据库类型下，Django field与column type的对应映射关系，Django operators与SQL之间的映射&amp;hellip;    DatabaseOperations  django.db.backends.base.operations.BaseDatabaseOperations, 封装不同数据库的不同SQL表达 eg: mysql   oracle   sql to flushes / sequence resets  DatabaseFeatures  django.db.backends.base.features.BaseDatabaseFeatures 当前数据库支持的操作  DatabaseCreation  django.db.backends.creation.BaseDatabaseCreation Encapsulate backend-specific differences pertaining to creation and destruction of the test database.</description>
     </item>
     
   </channel>

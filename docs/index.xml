@@ -7,14 +7,135 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh</language>
         <copyright>Hukx - All rights reserved</copyright>
-        <lastBuildDate>Mon, 10 Aug 2020 01:00:00 +0200</lastBuildDate><atom:link href="https://hukx.site/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>My First Post</title>
-        <link>https://hukx.site/posts/example-post/</link>
-        <pubDate>Mon, 10 Aug 2020 01:00:00 +0200</pubDate>
+        <lastBuildDate>Mon, 11 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hukx.site/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Django ORM 剖析</title>
+        <link>https://hukx.site/posts/description-of-django-orm/</link>
+        <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
         
-        <guid>https://hukx.site/posts/example-post/</guid>
-        <description>&lt;img src="https://hukx.site/posts/example-post/cover.jpg" alt="Featured image of post My First Post" /&gt;&lt;h1 id=&#34;first-post&#34;&gt;First Post&lt;/h1&gt;
-&lt;p&gt;哈哈哈&lt;/p&gt;
+        <guid>https://hukx.site/posts/description-of-django-orm/</guid>
+        <description>&lt;img src="https://hukx.site/posts/description-of-django-orm/orm.png" alt="Featured image of post Django ORM 剖析" /&gt;&lt;h3 id=&#34;orm实现组成&#34;&gt;ORM实现组成&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Model&lt;/li&gt;
+&lt;li&gt;Manager&lt;/li&gt;
+&lt;li&gt;QuerySet&lt;/li&gt;
+&lt;li&gt;Query&lt;/li&gt;
+&lt;li&gt;SQLCompiler&lt;/li&gt;
+&lt;li&gt;Database backend&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;database-backends&#34;&gt;DATABASE BACKENDS&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;基类实现及支持的数据库的各自实现（django/db/models/backends）&lt;/li&gt;
+&lt;li&gt;具体采用的是哪种实现依据数据库配置里面的ENGINE&lt;/li&gt;
+&lt;li&gt;ORM的底层行为的实现&lt;/li&gt;
+&lt;li&gt;介于Django与DB driver模块之间&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;databasewrapper&#34;&gt;Databasewrapper&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;django.db.backends.base.BaseDatabasewrapper，其他数据库的实现继承自该类，代表一条数据库连接&lt;/li&gt;
+&lt;li&gt;实现以下内容：
+&lt;ul&gt;
+&lt;li&gt;connection管理、cursor管理&lt;/li&gt;
+&lt;li&gt;事务管理&lt;/li&gt;
+&lt;li&gt;定义当前数据库类型下，Django field与column type的对应映射关系，Django operators与SQL之间的映射&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;databaseoperations&#34;&gt;DatabaseOperations&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;django.db.backends.base.operations.BaseDatabaseOperations, 封装不同数据库的不同SQL表达
+eg:
+mysql
+&lt;figure style=&#34;flex-grow: 163; flex-basis: 392px&#34;&gt;
+		&lt;a href=&#34;https://hukx.site/posts/description-of-django-orm/2018-10-08-11-48-04.png&#34; data-size=&#34;532x325&#34;&gt;&lt;img src=&#34;https://hukx.site/posts/description-of-django-orm/2018-10-08-11-48-04.png&#34;
+				srcset=&#34;https://hukx.site/posts/description-of-django-orm/2018-10-08-11-48-04_hu3f87c5642ecdc132738265900521927d_100735_480x0_resize_box_2.png 480w, https://hukx.site/posts/description-of-django-orm/2018-10-08-11-48-04_hu3f87c5642ecdc132738265900521927d_100735_1024x0_resize_box_2.png 1024w&#34;
+				width=&#34;532&#34;
+				height=&#34;325&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;
+oracle
+&lt;figure style=&#34;flex-grow: 232; flex-basis: 558px&#34;&gt;
+		&lt;a href=&#34;https://hukx.site/posts/description-of-django-orm/2018-10-08-11-48-44.png&#34; data-size=&#34;591x254&#34;&gt;&lt;img src=&#34;https://hukx.site/posts/description-of-django-orm/2018-10-08-11-48-44.png&#34;
+				srcset=&#34;https://hukx.site/posts/description-of-django-orm/2018-10-08-11-48-44_hue840388dd32337ff4184dc66e18a0e73_73736_480x0_resize_box_2.png 480w, https://hukx.site/posts/description-of-django-orm/2018-10-08-11-48-44_hue840388dd32337ff4184dc66e18a0e73_73736_1024x0_resize_box_2.png 1024w&#34;
+				width=&#34;591&#34;
+				height=&#34;254&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;sql to flushes / sequence resets&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;databasefeatures&#34;&gt;DatabaseFeatures&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;django.db.backends.base.features.BaseDatabaseFeatures 当前数据库支持的操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;databasecreation&#34;&gt;DatabaseCreation&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;django.db.backends.creation.BaseDatabaseCreation  Encapsulate backend-specific differences pertaining to creation and destruction of the test database.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;databaseintrospection&#34;&gt;DatabaseIntrospection&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;django.db.backends.introspection.BaseDatabaseIntrospection&lt;/li&gt;
+&lt;li&gt;inspectdb命令的实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;databaseschemaeditor&#34;&gt;DatabaseSchemaEditor&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;django.db.backends.base.schema.BaseDatabaseSchemaEditor&lt;/li&gt;
+&lt;li&gt;用来做migrations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;databaseclient&#34;&gt;DatabaseClient&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;django.db.backends.base.client.BaseDatabaseClient&lt;/li&gt;
+&lt;li&gt;dbshell命令的实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;sqlcompiler&#34;&gt;SQLCompiler&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;django.db.models.sql.compiler.SQLCompiler&lt;/li&gt;
+&lt;li&gt;将Django Query实例转化为SQL&lt;/li&gt;
+&lt;li&gt;SQLInsertCompiler/SQLDeleteCompliler/SQLUpdateCompiler/SQLAggregateCompiler&lt;/li&gt;
+&lt;li&gt;Query.get_compiler() -&amp;gt; 调用DatabaseOperations.compiler() -&amp;gt; 通过DatabaseOperations.compiler_module找到SQLCompiler类 ==&amp;gt; 为该Query返回一个SQLCompiler实例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;query&#34;&gt;Query&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;django.db.models.sql.query&lt;/li&gt;
+&lt;li&gt;分为Query(普通ORM操作) / RawQuery(raw())&lt;/li&gt;
+&lt;li&gt;包含与query相关的属性&lt;/li&gt;
+&lt;li&gt;包含select/tables/where/group_by/order_by/aggregates等&lt;/li&gt;
+&lt;li&gt;as_sql，生成SQL(self.get_compiler(connection=connection).as_sql())&lt;/li&gt;
+&lt;li&gt;query是一个树桩的数据结构，将他转变为SQL的过程包括遍历他的子节点，调用他们的as_sql方法，生成最终SQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;queryset&#34;&gt;QuerySet&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;django.db.models.query.QuerySet&lt;/li&gt;
+&lt;li&gt;Query实例的高层封装，提供用户使用的API&lt;/li&gt;
+&lt;li&gt;同时相当于一个查询到的记录集合的容器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;managers&#34;&gt;Managers&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;django.db.models.manager.Manager&lt;/li&gt;
+&lt;li&gt;Model.objects.xxx&lt;/li&gt;
+&lt;li&gt;get_queryset()为当前model返回一个QuerySet, Model.objects.xxx &amp;ndash;&amp;gt; queryset.xxx&lt;/li&gt;
+&lt;li&gt;do some custom&amp;hellip;
+&lt;figure style=&#34;flex-grow: 172; flex-basis: 414px&#34;&gt;
+		&lt;a href=&#34;https://hukx.site/posts/description-of-django-orm/2018-10-08-15-38-40.png&#34; data-size=&#34;594x344&#34;&gt;&lt;img src=&#34;https://hukx.site/posts/description-of-django-orm/2018-10-08-15-38-40.png&#34;
+				srcset=&#34;https://hukx.site/posts/description-of-django-orm/2018-10-08-15-38-40_hu6e6adc06cb1f69b9af217120dbe637fe_314836_480x0_resize_box_2.png 480w, https://hukx.site/posts/description-of-django-orm/2018-10-08-15-38-40_hu6e6adc06cb1f69b9af217120dbe637fe_314836_1024x0_resize_box_2.png 1024w&#34;
+				width=&#34;594&#34;
+				height=&#34;344&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;models&#34;&gt;Models&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;the actual representation of the data and associated logic&lt;/li&gt;
+&lt;li&gt;一个Model类对应数据库中的一张表，model的每个field对应数据表中的一列&lt;/li&gt;
+&lt;li&gt;ModelBases: 所有model的元类&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         
