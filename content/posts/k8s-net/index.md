@@ -7,7 +7,7 @@ image: "network.jpg"
 categories: [
     "技术杂谈"
 ]
-tags: ["Kubernetes", "Docker", "Networking"]
+tags: ["Kubernetes", "Docker", "Networking", "图解系列"]
 ---
 
 ### Docker Networking
@@ -26,3 +26,5 @@ K8s 解决的问题之一就是不同 host/node 间的容器通信问题
 #### service IP
 
 
+### 参考
+[Tutorial: Communication Is Key - Understanding Kubernetes Networking - Jeff Poole, Vivint Smart Home](https://youtu.be/InZVNuKY5GY)

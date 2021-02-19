@@ -23,6 +23,9 @@ K8s 解决的问题之一就是不同 host/node 间的容器通信问题&lt;/p&g
 &lt;h4 id=&#34;node-ip&#34;&gt;node IP&lt;/h4&gt;
 &lt;h4 id=&#34;pod-ip&#34;&gt;pod IP&lt;/h4&gt;
 &lt;h4 id=&#34;service-ip&#34;&gt;service IP&lt;/h4&gt;
+&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/InZVNuKY5GY&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Tutorial: Communication Is Key - Understanding Kubernetes Networking - Jeff Poole, Vivint Smart Home&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -155,6 +158,22 @@ oracle
 &lt;li&gt;ModelBases: 所有model的元类&lt;/li&gt;
 &lt;/ul&gt;
 </description>
+        </item>
+        <item>
+        <title>图解 Docker 虚拟化</title>
+        <link>https://hukx.site/posts/docker-virtual/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://hukx.site/posts/docker-virtual/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>图解 Kubernetes 架构</title>
+        <link>https://hukx.site/posts/brief-intro-to-arch-of-k8s-with-pictures/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://hukx.site/posts/brief-intro-to-arch-of-k8s-with-pictures/</guid>
+        <description></description>
         </item>
         
     </channel>

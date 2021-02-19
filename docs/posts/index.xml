@@ -15,7 +15,7 @@
       
       <guid>https://hukx.site/posts/brief-intro-to-networking-of-k8s-with-pictures/</guid>
       <description>Docker Networking 让我们先大致了解下 Docker Networking 默认 bridge 模式 通常 Docker 只负责当前同一 host/node 下的容器通信，不去暴露 container ip 给其他 host/node K8s 解决的问题之一就是不同 host/node 间的容器通信问题
-IP in Kubernetes node IP pod IP service IP </description>
+IP in Kubernetes node IP pod IP service IP 参考 Tutorial: Communication Is Key - Understanding Kubernetes Networking - Jeff Poole, Vivint Smart Home</description>
     </item>
     
     <item>
@@ -25,6 +25,24 @@ IP in Kubernetes node IP pod IP service IP </description>
       
       <guid>https://hukx.site/posts/description-of-django-orm/</guid>
       <description>ORM实现组成  Model Manager QuerySet Query SQLCompiler Database backend  DATABASE BACKENDS  基类实现及支持的数据库的各自实现（django/db/models/backends） 具体采用的是哪种实现依据数据库配置里面的ENGINE ORM的底层行为的实现 介于Django与DB driver模块之间  Databasewrapper  django.db.backends.base.BaseDatabasewrapper，其他数据库的实现继承自该类，代表一条数据库连接 实现以下内容：  connection管理、cursor管理 事务管理 定义当前数据库类型下，Django field与column type的对应映射关系，Django operators与SQL之间的映射&amp;hellip;    DatabaseOperations  django.db.backends.base.operations.BaseDatabaseOperations, 封装不同数据库的不同SQL表达 eg: mysql   oracle   sql to flushes / sequence resets  DatabaseFeatures  django.db.backends.base.features.BaseDatabaseFeatures 当前数据库支持的操作  DatabaseCreation  django.db.backends.creation.BaseDatabaseCreation Encapsulate backend-specific differences pertaining to creation and destruction of the test database.</description>
+    </item>
+    
+    <item>
+      <title>图解 Docker 虚拟化</title>
+      <link>https://hukx.site/posts/docker-virtual/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hukx.site/posts/docker-virtual/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>图解 Kubernetes 架构</title>
+      <link>https://hukx.site/posts/brief-intro-to-arch-of-k8s-with-pictures/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hukx.site/posts/brief-intro-to-arch-of-k8s-with-pictures/</guid>
+      <description></description>
     </item>
     
   </channel>
