@@ -12,6 +12,9 @@ lastmod = "2021-01-11"
 于         
 我      
 
+[![github stats](https://github-readme-stats.vercel.app/api?username=hukaixuan)](https://github.com/anuraghazra/github-readme-stats)
+
+
 ## Contact
 - **github**: https://github.com/hukaixuan
 - **mail**: hukx.michael@gmail.com

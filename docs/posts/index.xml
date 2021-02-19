@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>Hukx - All rights reserved</copyright>
-    <lastBuildDate>Fri, 19 Oct 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://hukx.site/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hukx.site/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>图解 Kubernetes 网络</title>
+      <link>https://hukx.site/posts/brief-intro-to-networking-of-k8s-with-pictures/</link>
+      <pubDate>Fri, 19 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hukx.site/posts/brief-intro-to-networking-of-k8s-with-pictures/</guid>
+      <description>Docker Networking 让我们先大致了解下 Docker Networking 默认 bridge 模式 通常 Docker 只负责当前同一 host/node 下的容器通信，不去暴露 container ip 给其他 host/node K8s 解决的问题之一就是不同 host/node 间的容器通信问题
+IP in Kubernetes node IP pod IP service IP </description>
+    </item>
+    
     <item>
       <title>Django ORM 剖析</title>
       <link>https://hukx.site/posts/description-of-django-orm/</link>

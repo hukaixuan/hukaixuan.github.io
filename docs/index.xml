@@ -7,7 +7,25 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh</language>
         <copyright>Hukx - All rights reserved</copyright>
-        <lastBuildDate>Mon, 11 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hukx.site/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 19 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hukx.site/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>图解 Kubernetes 网络</title>
+        <link>https://hukx.site/posts/brief-intro-to-networking-of-k8s-with-pictures/</link>
+        <pubDate>Fri, 19 Feb 2021 00:00:00 +0000</pubDate>
+        
+        <guid>https://hukx.site/posts/brief-intro-to-networking-of-k8s-with-pictures/</guid>
+        <description>&lt;img src="https://hukx.site/posts/brief-intro-to-networking-of-k8s-with-pictures/network.jpg" alt="Featured image of post 图解 Kubernetes 网络" /&gt;&lt;h3 id=&#34;docker-networking&#34;&gt;Docker Networking&lt;/h3&gt;
+&lt;p&gt;让我们先大致了解下 Docker Networking &lt;br&gt;
+默认 bridge 模式 &lt;br&gt;
+&lt;img src=&#34;./docker-bridge.png&#34; alt=&#34;docker bridge mode&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;通常 Docker 只负责当前同一 host/node 下的容器通信，不去暴露 container ip 给其他 host/node &lt;br&gt;
+K8s 解决的问题之一就是不同 host/node 间的容器通信问题&lt;/p&gt;
+&lt;h3 id=&#34;ip-in-kubernetes&#34;&gt;IP in Kubernetes&lt;/h3&gt;
+&lt;h4 id=&#34;node-ip&#34;&gt;node IP&lt;/h4&gt;
+&lt;h4 id=&#34;pod-ip&#34;&gt;pod IP&lt;/h4&gt;
+&lt;h4 id=&#34;service-ip&#34;&gt;service IP&lt;/h4&gt;
+</description>
+        </item>
+        <item>
         <title>Django ORM 剖析</title>
         <link>https://hukx.site/posts/description-of-django-orm/</link>
         <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
