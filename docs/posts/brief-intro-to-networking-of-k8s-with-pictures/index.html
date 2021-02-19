@@ -244,9 +244,37 @@
 <p>通常 Docker 只负责当前同一 host/node 下的容器通信，不去暴露 container ip 给其他 host/node <br>
 K8s 解决的问题之一就是不同 host/node 间的容器通信问题</p>
 <h3 id="ip-in-kubernetes">IP in Kubernetes</h3>
-<h4 id="node-ip">node IP</h4>
-<h4 id="pod-ip">pod IP</h4>
-<h4 id="service-ip">service IP</h4>
+<p>下面大概介绍下 K8s 中的三大类 IP</p>
+<ul>
+<li><strong>node IP</strong>
+<ul>
+<li>节点 IP，每个 K8s 节点都需要有一个 IP 地址</li>
+<li>其实不属于 K8s 管理的范畴，通过其他方式分配，如：DHCP、手动配置、云厂商分配等</li>
+</ul>
+</li>
+<li><strong>pod IP</strong>
+<ul>
+<li>一个 pod 里的多个 containers 共享同一个 network namespace</li>
+<li>每个 pod 会被分配 IP 地址，通过你当前使用的 CNI(Container Network Interface) 插件的 IPAM 功能分配
+<ul>
+<li>最基本的方式是通过给每个 node 分配一段 IP 地址段，node 再在这个地址段中分配 IP 给其上的 pod</li>
+<li>有些插件会动态分配 IP 段</li>
+</ul>
+</li>
+<li>kube-apiserver 通过启动参数 <code>--cluster-cidr=172.16.0.0.0/16</code> 来决定所有 pod 的 IP 地址段</li>
+</ul>
+</li>
+<li><strong>service IP</strong>
+<ul>
+<li>K8s service 是对一组 pod 的一个抽象</li>
+<li>所有 non-headless service 都有一个 ClusterIP</li>
+<li>kube-apiserver 通过参数 <code>--service-cluster-ip-range=172.15.100.0/23</code> 来决定 ClusterIPs 的 IP 池</li>
+<li>通过 apiserver 组件管理分配，告诉 kubelet 进程 serives 与 IP 的映射关系，及 serivce 对应的 endpoints IP（如对应 pod 的 IP）</li>
+</ul>
+</li>
+</ul>
+<p>以上三者关系如图</p>
+<p><img src="./k8s-ip-rel.png" alt="K8s IP relationship"  /></p>
 <h3 id="参考">参考</h3>
 <p><a class="link" href="https://youtu.be/InZVNuKY5GY"  target="_blank" rel="noopener"
     >Tutorial: Communication Is Key - Understanding Kubernetes Networking - Jeff Poole, Vivint Smart Home</a></p>

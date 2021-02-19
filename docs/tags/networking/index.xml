@@ -15,7 +15,8 @@
       
       <guid>https://hukx.site/posts/brief-intro-to-networking-of-k8s-with-pictures/</guid>
       <description>Docker Networking 让我们先大致了解下 Docker Networking 默认 bridge 模式 通常 Docker 只负责当前同一 host/node 下的容器通信，不去暴露 container ip 给其他 host/node K8s 解决的问题之一就是不同 host/node 间的容器通信问题
-IP in Kubernetes node IP pod IP service IP 参考 Tutorial: Communication Is Key - Understanding Kubernetes Networking - Jeff Poole, Vivint Smart Home</description>
+IP in Kubernetes 下面大概介绍下 K8s 中的三大类 IP
+ node IP  节点 IP，每个 K8s 节点都需要有一个 IP 地址 其实不属于 K8s 管理的范畴，通过其他方式分配，如：DHCP、手动配置、云厂商分配等   pod IP  一个 pod 里的多个 containers 共享同一个 network namespace 每个 pod 会被分配 IP 地址，通过你当前使用的 CNI(Container Network Interface) 插件的 IPAM 功能分配  最基本的方式是通过给每个 node 分配一段 IP 地址段，node 再在这个地址段中分配 IP 给其上的 pod 有些插件会动态分配 IP 段   kube-apiserver 通过启动参数 --cluster-cidr=172.</description>
     </item>
     
   </channel>
