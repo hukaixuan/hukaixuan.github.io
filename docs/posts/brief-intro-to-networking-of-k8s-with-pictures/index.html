@@ -274,7 +274,29 @@ K8s 解决的问题之一就是不同 host/node 间的容器通信问题</p>
 </li>
 </ul>
 <p>以上三者关系如图</p>
-<p><img src="./k8s-ip-rel.png" alt="K8s IP relationship"  /></p>
+<p><figure style="flex-grow: 103; flex-basis: 249px">
+		<a href="/posts/brief-intro-to-networking-of-k8s-with-pictures/2021-02-20-10-34-31.png" data-size="829x798"><img src="/posts/brief-intro-to-networking-of-k8s-with-pictures/2021-02-20-10-34-31.png"
+				srcset="/posts/brief-intro-to-networking-of-k8s-with-pictures/2021-02-20-10-34-31_huce1929c0f3841b162f1c5b7be7578eac_216161_480x0_resize_box_2.png 480w, /posts/brief-intro-to-networking-of-k8s-with-pictures/2021-02-20-10-34-31_huce1929c0f3841b162f1c5b7be7578eac_216161_1024x0_resize_box_2.png 1024w"
+				width="829"
+				height="798"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<h3 id="cni">CNI</h3>
+<h4 id="flannel">Flannel</h4>
+<p>Flannel 是早期的网络插件之一，适合小的 K8s 集群。运行在 OSI 网络模型的第二层数据链路层（Ethernet）</p>
+<p><strong>IPAM</strong> <br>
+Flannel 分配静态 IP 网段到 K8s Node，K8s Node 从分配到的网段再分配 IP 给 pod</p>
+<p><strong>Encapsulation 封包</strong>   <br>
+默认封包策略是 <em>VXLAN</em>（将 2 层以太网包封装到 UDP 包内）</p>
+<h4 id="calico">Calico</h4>
+<p>Calico 运行在 OSI 网络模型的第三层网络层（IP），因此只有 IP 流量会被能被封装，and everything is routed</p>
+<p><strong>IPAM</strong>   <br>
+Calico 使用 K8s API server 或者自己的 etcd cluster 集群来实现了动态的网段划分</p>
+<p><strong>Encapsulation 封包</strong>
+Calico 默认的封包策略是 “IP-in-IP”(将 3 层的 IP 包添加额外的 IP 头形成一个新的 IP 包)，开销很小，但只能封装 IP 包</p>
 <h3 id="参考">参考</h3>
 <p><a class="link" href="https://youtu.be/InZVNuKY5GY"  target="_blank" rel="noopener"
     >Tutorial: Communication Is Key - Understanding Kubernetes Networking - Jeff Poole, Vivint Smart Home</a></p>

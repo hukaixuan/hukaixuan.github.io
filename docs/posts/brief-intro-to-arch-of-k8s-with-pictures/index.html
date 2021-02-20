@@ -9,9 +9,10 @@
 <meta property='og:description' content='Brief intro to arch of K8s with pictures'>
 <meta property='og:url' content='https://hukx.site/posts/brief-intro-to-arch-of-k8s-with-pictures/'>
 <meta property='og:site_name' content='Hukx'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Kubernetes' /><meta property='article:tag' content='Docker' /><meta property='article:tag' content='图解系列' />
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Kubernetes' /><meta property='article:tag' content='Docker' /><meta property='article:tag' content='图解系列' /><meta property='article:published_time' content='2021-02-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-02-20T00:00:00&#43;00:00'/><meta property='og:image' content='https://hukx.site/posts/brief-intro-to-arch-of-k8s-with-pictures/2021-02-20-10-43-16.png' />
 <meta name="twitter:title" content="图解 Kubernetes 架构">
-<meta name="twitter:description" content="Brief intro to arch of K8s with pictures">
+<meta name="twitter:description" content="Brief intro to arch of K8s with pictures"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://hukx.site/posts/brief-intro-to-arch-of-k8s-with-pictures/2021-02-20-10-43-16.png' />
     <link rel="shortcut icon" href="favicon.png" />
 
     </head>
@@ -188,8 +189,20 @@
 </aside>
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/posts/brief-intro-to-arch-of-k8s-with-pictures/">
+                <img src="/posts/brief-intro-to-arch-of-k8s-with-pictures/2021-02-20-10-43-16_hu5d7990e807ce1f891ff764525f98dfaf_448463_800x0_resize_box_2.png"
+                        srcset="/posts/brief-intro-to-arch-of-k8s-with-pictures/2021-02-20-10-43-16_hu5d7990e807ce1f891ff764525f98dfaf_448463_800x0_resize_box_2.png 800w, /posts/brief-intro-to-arch-of-k8s-with-pictures/2021-02-20-10-43-16_hu5d7990e807ce1f891ff764525f98dfaf_448463_1600x0_resize_box_2.png 1600w"
+                        width="800" 
+                        height="524" 
+                        loading="lazy"
+                        alt="Featured image of post 图解 Kubernetes 架构" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
@@ -210,11 +223,81 @@
     <h3 class="article-subtitle">
         Brief intro to arch of K8s with pictures
     </h3>
-    </div>
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Feb 20, 2021</time>
+    </footer></div>
 </header>
 
     <section class="article-content">
-    
+    <h3 id="0-架构图">0. 架构图</h3>
+<p>Kubernetes 组件整体架构如下图
+<figure style="flex-grow: 152; flex-basis: 366px">
+		<a href="/posts/brief-intro-to-arch-of-k8s-with-pictures/2021-02-20-10-43-16.png" data-size="1499x982"><img src="/posts/brief-intro-to-arch-of-k8s-with-pictures/2021-02-20-10-43-16.png"
+				srcset="/posts/brief-intro-to-arch-of-k8s-with-pictures/2021-02-20-10-43-16_hu5d7990e807ce1f891ff764525f98dfaf_448463_480x0_resize_box_2.png 480w, /posts/brief-intro-to-arch-of-k8s-with-pictures/2021-02-20-10-43-16_hu5d7990e807ce1f891ff764525f98dfaf_448463_1024x0_resize_box_2.png 1024w"
+				width="1499"
+				height="982"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<h3 id="1-控制面组件">1. 控制面组件</h3>
+<h4 id="11-kube-apiserver">1.1 kube-apiserver</h4>
+<p>API server 是用于暴露 K8s API 的控制面组件，是控制面的前端端点  <br>
+主要实现是 <a class="link" href="https://kubernetes.io/docs/reference/generated/kube-apiserver/"  target="_blank" rel="noopener"
+    >kube-apiserver</a>。kube-apiserver 可横向扩展</p>
+<h4 id="12-etcd">1.2 etcd</h4>
+<p>一致性高可用 kv 存储，用作 K8s 集群数据的后备存储 <br>
+有关 etcd 的更多信息参阅<a class="link" href="https://etcd.io/docs/"  target="_blank" rel="noopener"
+    >官网</a></p>
+<h4 id="13-kube-scheduler">1.3 kube-scheduler</h4>
+<p>用于给新创建的 Pods 分配 node 的控制面组件  <br>
+影响调度策略的因素包括：局部及整体的资源需求、硬件/软件/策略 限制、亲和性及反亲和性声明、数据位置、workload 间的干扰性及 deadlines</p>
+<h4 id="14-kube-controller-manager">1.4 kube-controller-manager</h4>
+<p>运行 controller 进程的控制面组件  <br>
+每个 controller 逻辑上是独立的，但为了降低复杂性，他们是被编译成一个二进制文件运行在同一个进程的  <br>
+这些 controller 包括：</p>
+<ul>
+<li>节点控制器（Node controller）：负责在节点发生故障时的通知和响应</li>
+<li>副本控制器（Replication controller）：为系统中所有副本控制器对象维持正确数量的 pods</li>
+<li>端点控制器（Endpoints controller）：填充端点（Endpoints）对象（加入 Service 与 Pod）</li>
+<li>服务账户和令牌控制器（Service Account &amp; Token controllers）：为新的命名空间创建默认账户和 API 访问 token</li>
+</ul>
+<h4 id="15-cloud-controller-manager可选组件">1.5 cloud-controller-manager(可选组件)</h4>
+<p>是接入特定云的控制逻辑的控制面组件    <br>
+如下列控制器包含对云平台驱动的依赖：</p>
+<ul>
+<li>节点控制器（Node Controller）: 用于在节点终止响应后检查云提供商以确定节点是否已被删除</li>
+<li>路由控制器（Route Controller）: 用于在底层云基础架构中设置路由</li>
+<li>服务控制器（Service Controller）: 用于创建、更新和删除云提供商负载均衡器</li>
+</ul>
+<h3 id="2-node-组件">2. Node 组件</h3>
+<h4 id="21-kubelet">2.1 kubelet</h4>
+<p>运行在集群每个节点上的一个 agent，用于确保 containers 运行在 pod 中 <br>
+kubelet 根据提供的 PodSpecs 确保 containers 按期望的 PodSpecs 正常地运行。它不会管理不是通过 K8s 创建的容器</p>
+<h4 id="22-kube-proxy">2.2 kube-proxy</h4>
+<p>运行在集群每个节点上的网络代理，实现了 K8s Service 的部分概念  <br>
+kube-proxy 维护节点上的网络规则，这些规则允许从集群内部及外部与当前节点上的 Pod 的进行通信 <br>
+如果操作系统有网络包过滤层且可用的话，kube-proxy 会通过它来实现网络规则，否则 kube-proxy 自身会转发流量</p>
+<h4 id="23-container-runtime">2.3 Container runtime</h4>
+<p>容器运行时（the container runtime）是一个负责运行 container 的软件  <br>
+K8s 支持多种容器运行时：Docker、containerd、CRI-O 及 任何 <a class="link" href="https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/container-runtime-interface.md"  target="_blank" rel="noopener"
+    >Kubernetes CRI(Container Runtime Interface)</a>的实现</p>
+<h3 id="参考">参考</h3>
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/overview/components/">https://kubernetes.io/docs/concepts/overview/components/</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/architecture/control-plane-node-communication/">https://kubernetes.io/docs/concepts/architecture/control-plane-node-communication/</a></li>
+<li><a href="https://draveness.me/understanding-kubernetes/">https://draveness.me/understanding-kubernetes/</a></li>
+</ul>
+
 </section>
 
 

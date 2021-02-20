@@ -37,7 +37,27 @@ K8s 解决的问题之一就是不同 host/node 间的容器通信问题
 
 以上三者关系如图
 
-![K8s IP relationship](./k8s-ip-rel.png)
+![](2021-02-20-10-34-31.png)
+
+### CNI
+
+#### Flannel
+Flannel 是早期的网络插件之一，适合小的 K8s 集群。运行在 OSI 网络模型的第二层数据链路层（Ethernet）       
+
+**IPAM**    
+Flannel 分配静态 IP 网段到 K8s Node，K8s Node 从分配到的网段再分配 IP 给 pod
+
+**Encapsulation 封包**      
+默认封包策略是 *VXLAN*（将 2 层以太网包封装到 UDP 包内）
+
+#### Calico
+Calico 运行在 OSI 网络模型的第三层网络层（IP），因此只有 IP 流量会被能被封装，and everything is routed
+
+**IPAM**      
+Calico 使用 K8s API server 或者自己的 etcd cluster 集群来实现了动态的网段划分
+
+**Encapsulation 封包**
+Calico 默认的封包策略是 “IP-in-IP”(将 3 层的 IP 包添加额外的 IP 头形成一个新的 IP 包)，开销很小，但只能封装 IP 包
 
 ### 参考
 [Tutorial: Communication Is Key - Understanding Kubernetes Networking - Jeff Poole, Vivint Smart Home](https://youtu.be/InZVNuKY5GY)
