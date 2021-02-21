@@ -7,7 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>Hukx - All rights reserved</copyright>
-    <lastBuildDate>Sat, 20 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hukx.site/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hukx.site/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>图解 Linux Container 原理</title>
+      <link>https://hukx.site/posts/docker-virtual/</link>
+      <pubDate>Sun, 21 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hukx.site/posts/docker-virtual/</guid>
+      <description>0. What is a container 容器（Containers）是基于几种 Linux 技术（如 Cgroups、Namespaces、Union filesystem）之上的抽象组合  
+1. Control groups &amp;ldquo;limits how much you can use&amp;rdquo;
+1.1 cgroups 能力  组织系统中的所有进程 负责收集资源使用信息 对资源使用进行限制或者区分优先级  1.2 Subsystems Control group 是一个抽象框架，Subsystems 是具体实现
+subsystems 举例:  
+2. Namespaces &amp;ldquo;limits what you can see&amp;rdquo;
+2.1 Namespaces 能力  资源隔离的机制 在 namespace 内对资源的修改对当前 namespace 之外不可见 资源映射  2.2 可作 namespaces 的资源  Network Filesystem (mounts) Processes (pid) Inter-process communication (ipc) Hostname and domain name (uts) User and groups IDs cgroup  unshare</description>
+    </item>
+    
     <item>
       <title>图解 Kubernetes 架构</title>
       <link>https://hukx.site/posts/brief-intro-to-arch-of-k8s-with-pictures/</link>
@@ -31,15 +45,6 @@
       <description>Docker Networking 让我们先大致了解下 Docker Networking 默认 bridge 模式 通常 Docker 只负责当前同一 host/node 下的容器通信，不去暴露 container ip 给其他 host/node K8s 解决的问题之一就是不同 host/node 间的容器通信问题
 IP in Kubernetes 下面大概介绍下 K8s 中的三大类 IP
  node IP  节点 IP，每个 K8s 节点都需要有一个 IP 地址 其实不属于 K8s 管理的范畴，通过其他方式分配，如：DHCP、手动配置、云厂商分配等   pod IP  一个 pod 里的多个 containers 共享同一个 network namespace 每个 pod 会被分配 IP 地址，通过你当前使用的 CNI(Container Network Interface) 插件的 IPAM 功能分配  最基本的方式是通过给每个 node 分配一段 IP 地址段，node 再在这个地址段中分配 IP 给其上的 pod 有些插件会动态分配 IP 段   kube-apiserver 通过启动参数 --cluster-cidr=172.</description>
-    </item>
-    
-    <item>
-      <title>图解 Docker 虚拟化</title>
-      <link>https://hukx.site/posts/docker-virtual/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://hukx.site/posts/docker-virtual/</guid>
-      <description>参考  https://youtu.be/sK5i-N34im8  </description>
     </item>
     
   </channel>

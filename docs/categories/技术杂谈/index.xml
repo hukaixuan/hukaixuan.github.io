@@ -7,7 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>Hukx - All rights reserved</copyright>
-    <lastBuildDate>Sat, 20 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hukx.site/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hukx.site/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>图解 Linux Container 原理</title>
+      <link>https://hukx.site/posts/docker-virtual/</link>
+      <pubDate>Sun, 21 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hukx.site/posts/docker-virtual/</guid>
+      <description>0. What is a container 容器（Containers）是基于几种 Linux 技术（如 Cgroups、Namespaces、Union filesystem）之上的抽象组合  
+1. Control groups &amp;ldquo;limits how much you can use&amp;rdquo;
+1.1 cgroups 能力  组织系统中的所有进程 负责收集资源使用信息 对资源使用进行限制或者区分优先级  1.2 Subsystems Control group 是一个抽象框架，Subsystems 是具体实现
+subsystems 举例:  
+2. Namespaces &amp;ldquo;limits what you can see&amp;rdquo;
+2.1 Namespaces 能力  资源隔离的机制 在 namespace 内对资源的修改对当前 namespace 之外不可见 资源映射  2.2 可作 namespaces 的资源  Network Filesystem (mounts) Processes (pid) Inter-process communication (ipc) Hostname and domain name (uts) User and groups IDs cgroup  unshare</description>
+    </item>
+    
     <item>
       <title>图解 Kubernetes 架构</title>
       <link>https://hukx.site/posts/brief-intro-to-arch-of-k8s-with-pictures/</link>
@@ -40,15 +54,6 @@ IP in Kubernetes 下面大概介绍下 K8s 中的三大类 IP
       
       <guid>https://hukx.site/posts/description-of-django-orm/</guid>
       <description>ORM实现组成  Model Manager QuerySet Query SQLCompiler Database backend  DATABASE BACKENDS  基类实现及支持的数据库的各自实现（django/db/models/backends） 具体采用的是哪种实现依据数据库配置里面的ENGINE ORM的底层行为的实现 介于Django与DB driver模块之间  Databasewrapper  django.db.backends.base.BaseDatabasewrapper，其他数据库的实现继承自该类，代表一条数据库连接 实现以下内容：  connection管理、cursor管理 事务管理 定义当前数据库类型下，Django field与column type的对应映射关系，Django operators与SQL之间的映射&amp;hellip;    DatabaseOperations  django.db.backends.base.operations.BaseDatabaseOperations, 封装不同数据库的不同SQL表达 eg: mysql   oracle   sql to flushes / sequence resets  DatabaseFeatures  django.db.backends.base.features.BaseDatabaseFeatures 当前数据库支持的操作  DatabaseCreation  django.db.backends.creation.BaseDatabaseCreation Encapsulate backend-specific differences pertaining to creation and destruction of the test database.</description>
-    </item>
-    
-    <item>
-      <title>图解 Docker 虚拟化</title>
-      <link>https://hukx.site/posts/docker-virtual/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://hukx.site/posts/docker-virtual/</guid>
-      <description>参考  https://youtu.be/sK5i-N34im8  </description>
     </item>
     
   </channel>

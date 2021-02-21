@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html lang="zh">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='参考  https://youtu.be/sK5i-N34im8  '><title>图解 Docker 虚拟化</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='0. What is a container 容器（Containers）是基于几种 Linux 技术（如 Cgroups、Namespaces、Union filesystem）之上的抽象组合  
+1. Control groups &amp;ldquo;limits how much you can use&amp;rdquo;
+1.1 cgroups 能力  组织系统中的所有进程 负责收集资源使用信息 对资源使用进行限制或者区分优先级  1.2 Subsystems Control group 是一个抽象框架，Subsystems 是具体实现
+subsystems 举例:  
+2. Namespaces &amp;ldquo;limits what you can see&amp;rdquo;
+2.1 Namespaces 能力  资源隔离的机制 在 namespace 内对资源的修改对当前 namespace 之外不可见 资源映射  2.2 可作 namespaces 的资源  Network Filesystem (mounts) Processes (pid) Inter-process communication (ipc) Hostname and domain name (uts) User and groups IDs cgroup  unshare'><title>图解 Linux Container 原理</title>
 
 <link rel='canonical' href='https://hukx.site/posts/docker-virtual/'>
 
-<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='图解 Docker 虚拟化'>
-<meta property='og:description' content='参考  https://youtu.be/sK5i-N34im8  '>
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='图解 Linux Container 原理'>
+<meta property='og:description' content='0. What is a container 容器（Containers）是基于几种 Linux 技术（如 Cgroups、Namespaces、Union filesystem）之上的抽象组合  
+1. Control groups &amp;ldquo;limits how much you can use&amp;rdquo;
+1.1 cgroups 能力  组织系统中的所有进程 负责收集资源使用信息 对资源使用进行限制或者区分优先级  1.2 Subsystems Control group 是一个抽象框架，Subsystems 是具体实现
+subsystems 举例:  
+2. Namespaces &amp;ldquo;limits what you can see&amp;rdquo;
+2.1 Namespaces 能力  资源隔离的机制 在 namespace 内对资源的修改对当前 namespace 之外不可见 资源映射  2.2 可作 namespaces 的资源  Network Filesystem (mounts) Processes (pid) Inter-process communication (ipc) Hostname and domain name (uts) User and groups IDs cgroup  unshare'>
 <meta property='og:url' content='https://hukx.site/posts/docker-virtual/'>
 <meta property='og:site_name' content='Hukx'>
-<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Docker' /><meta property='article:tag' content='图解系列' />
-<meta name="twitter:title" content="图解 Docker 虚拟化">
-<meta name="twitter:description" content="参考  https://youtu.be/sK5i-N34im8  ">
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='Docker' /><meta property='article:tag' content='图解系列' /><meta property='article:tag' content='Container' /><meta property='article:published_time' content='2021-02-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2021-02-21T00:00:00&#43;00:00'/><meta property='og:image' content='https://hukx.site/posts/docker-virtual/2021-02-21-14-39-51.png' />
+<meta name="twitter:title" content="图解 Linux Container 原理">
+<meta name="twitter:description" content="0. What is a container 容器（Containers）是基于几种 Linux 技术（如 Cgroups、Namespaces、Union filesystem）之上的抽象组合  
+1. Control groups &amp;ldquo;limits how much you can use&amp;rdquo;
+1.1 cgroups 能力  组织系统中的所有进程 负责收集资源使用信息 对资源使用进行限制或者区分优先级  1.2 Subsystems Control group 是一个抽象框架，Subsystems 是具体实现
+subsystems 举例:  
+2. Namespaces &amp;ldquo;limits what you can see&amp;rdquo;
+2.1 Namespaces 能力  资源隔离的机制 在 namespace 内对资源的修改对当前 namespace 之外不可见 资源映射  2.2 可作 namespaces 的资源  Network Filesystem (mounts) Processes (pid) Inter-process communication (ipc) Hostname and domain name (uts) User and groups IDs cgroup  unshare"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://hukx.site/posts/docker-virtual/2021-02-21-14-39-51.png' />
     <link rel="shortcut icon" href="favicon.png" />
 
     </head>
@@ -188,8 +204,20 @@
 </aside>
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="/posts/docker-virtual/">
+                <img src="/posts/docker-virtual/2021-02-21-14-39-51_hu2ed67d350811f456e8d6a4adf4cbeca1_211969_800x0_resize_box_2.png"
+                        srcset="/posts/docker-virtual/2021-02-21-14-39-51_hu2ed67d350811f456e8d6a4adf4cbeca1_211969_800x0_resize_box_2.png 800w, /posts/docker-virtual/2021-02-21-14-39-51_hu2ed67d350811f456e8d6a4adf4cbeca1_211969_1600x0_resize_box_2.png 1600w"
+                        width="800" 
+                        height="603" 
+                        loading="lazy"
+                        alt="Featured image of post 图解 Linux Container 原理" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
     
@@ -203,16 +231,109 @@
     
 
     <h2 class="article-title">
-        <a href="/posts/docker-virtual/">图解 Docker 虚拟化</a>
+        <a href="/posts/docker-virtual/">图解 Linux Container 原理</a>
     </h2>
 
-    </div>
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">Feb 21, 2021</time>
+    </footer></div>
 </header>
 
     <section class="article-content">
-    <h3 id="参考">参考</h3>
+    <h3 id="0-what-is-a-container">0. What is a container</h3>
+<p>容器（Containers）是基于几种 Linux 技术（如 Cgroups、Namespaces、Union filesystem）之上的抽象组合
+<figure style="flex-grow: 132; flex-basis: 318px">
+		<a href="/posts/docker-virtual/2021-02-21-14-39-51.png" data-size="686x517"><img src="/posts/docker-virtual/2021-02-21-14-39-51.png"
+				srcset="/posts/docker-virtual/2021-02-21-14-39-51_hu2ed67d350811f456e8d6a4adf4cbeca1_211969_480x0_resize_box_2.png 480w, /posts/docker-virtual/2021-02-21-14-39-51_hu2ed67d350811f456e8d6a4adf4cbeca1_211969_1024x0_resize_box_2.png 1024w"
+				width="686"
+				height="517"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<h3 id="1-control-groups">1. Control groups</h3>
+<p>&ldquo;limits how much you can use&rdquo;</p>
+<h4 id="11-cgroups-能力">1.1 cgroups 能力</h4>
+<ul>
+<li>组织系统中的所有进程</li>
+<li>负责收集资源使用信息</li>
+<li>对资源使用进行限制或者区分优先级</li>
+</ul>
+<h4 id="12-subsystems">1.2 Subsystems</h4>
+<p>Control group 是一个抽象框架，Subsystems 是具体实现</p>
+<p>subsystems 举例:
+<figure style="flex-grow: 155; flex-basis: 374px">
+		<a href="/posts/docker-virtual/2021-02-21-16-29-58.png" data-size="647x415"><img src="/posts/docker-virtual/2021-02-21-16-29-58.png"
+				srcset="/posts/docker-virtual/2021-02-21-16-29-58_hu4b814950657a071bd5f2f8c3b9bd9407_64316_480x0_resize_box_2.png 480w, /posts/docker-virtual/2021-02-21-16-29-58_hu4b814950657a071bd5f2f8c3b9bd9407_64316_1024x0_resize_box_2.png 1024w"
+				width="647"
+				height="415"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<h3 id="2-namespaces">2. Namespaces</h3>
+<p>&ldquo;limits what you can see&rdquo;</p>
+<h4 id="21-namespaces-能力">2.1 Namespaces 能力</h4>
+<ul>
+<li>资源隔离的机制</li>
+<li>在 namespace 内对资源的修改对当前 namespace 之外不可见</li>
+<li>资源映射</li>
+</ul>
+<h4 id="22-可作-namespaces-的资源">2.2 可作 namespaces 的资源</h4>
+<ul>
+<li>Network</li>
+<li>Filesystem (mounts)</li>
+<li>Processes (pid)</li>
+<li>Inter-process communication (ipc)</li>
+<li>Hostname and domain name (uts)</li>
+<li>User and groups IDs</li>
+<li>cgroup</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>unshare</p>
+<h3 id="3-union-filesystem">3. Union Filesystem</h3>
+<h4 id="31-copy-on-write">3.1 copy-on-write</h4>
+<p><figure style="flex-grow: 116; flex-basis: 280px">
+		<a href="/posts/docker-virtual/2021-02-21-16-19-46.png" data-size="592x506"><img src="/posts/docker-virtual/2021-02-21-16-19-46.png"
+				srcset="/posts/docker-virtual/2021-02-21-16-19-46_huf0e84f6fb16558ef91eb06713fea7869_72406_480x0_resize_box_2.png 480w, /posts/docker-virtual/2021-02-21-16-19-46_huf0e84f6fb16558ef91eb06713fea7869_72406_1024x0_resize_box_2.png 1024w"
+				width="592"
+				height="506"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure>
+待补充&hellip;</p>
+<h3 id="runtimes">Runtimes</h3>
+<p>用来管理配置 Linux 上述能力来在 host 上创建运行 containers 的软件工具  <br>
+<figure style="flex-grow: 224; flex-basis: 538px">
+		<a href="/posts/docker-virtual/2021-02-21-16-28-43.png" data-size="550x245"><img src="/posts/docker-virtual/2021-02-21-16-28-43.png"
+				srcset="/posts/docker-virtual/2021-02-21-16-28-43_hu96bc6dea89289c3ceeb9656ee7b66212_35659_480x0_resize_box_2.png 480w, /posts/docker-virtual/2021-02-21-16-28-43_hu96bc6dea89289c3ceeb9656ee7b66212_35659_1024x0_resize_box_2.png 1024w"
+				width="550"
+				height="245"
+				loading="lazy"
+				>
+		</a>
+		
+	</figure></p>
+<h3 id="参考">参考</h3>
 <ul>
 <li><a href="https://youtu.be/sK5i-N34im8">https://youtu.be/sK5i-N34im8</a></li>
+<li><a class="link" href="https://youtu.be/x1npPrzyKfs"  target="_blank" rel="noopener"
+    >Linux Container Primitives - cgroups, namespaces, and more!</a></li>
+<li><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt">https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt</a></li>
+<li><a href="https://tech.meituan.com/2015/03/31/cgroups.html">https://tech.meituan.com/2015/03/31/cgroups.html</a></li>
 </ul>
 
 </section>
@@ -225,6 +346,8 @@
             <a href="/tags/docker/">Docker</a>
         
             <a href="/tags/%E5%9B%BE%E8%A7%A3%E7%B3%BB%E5%88%97/">图解系列</a>
+        
+            <a href="/tags/container/">Container</a>
         
     </section>
 

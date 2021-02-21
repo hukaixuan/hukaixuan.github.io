@@ -7,7 +7,102 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh</language>
         <copyright>Hukx - All rights reserved</copyright>
-        <lastBuildDate>Sat, 20 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hukx.site/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 21 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hukx.site/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>图解 Linux Container 原理</title>
+        <link>https://hukx.site/posts/docker-virtual/</link>
+        <pubDate>Sun, 21 Feb 2021 00:00:00 +0000</pubDate>
+        
+        <guid>https://hukx.site/posts/docker-virtual/</guid>
+        <description>&lt;img src="https://hukx.site/posts/docker-virtual/2021-02-21-14-39-51.png" alt="Featured image of post 图解 Linux Container 原理" /&gt;&lt;h3 id=&#34;0-what-is-a-container&#34;&gt;0. What is a container&lt;/h3&gt;
+&lt;p&gt;容器（Containers）是基于几种 Linux 技术（如 Cgroups、Namespaces、Union filesystem）之上的抽象组合
+&lt;figure style=&#34;flex-grow: 132; flex-basis: 318px&#34;&gt;
+		&lt;a href=&#34;https://hukx.site/posts/docker-virtual/2021-02-21-14-39-51.png&#34; data-size=&#34;686x517&#34;&gt;&lt;img src=&#34;https://hukx.site/posts/docker-virtual/2021-02-21-14-39-51.png&#34;
+				srcset=&#34;https://hukx.site/posts/docker-virtual/2021-02-21-14-39-51_hu2ed67d350811f456e8d6a4adf4cbeca1_211969_480x0_resize_box_2.png 480w, https://hukx.site/posts/docker-virtual/2021-02-21-14-39-51_hu2ed67d350811f456e8d6a4adf4cbeca1_211969_1024x0_resize_box_2.png 1024w&#34;
+				width=&#34;686&#34;
+				height=&#34;517&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1-control-groups&#34;&gt;1. Control groups&lt;/h3&gt;
+&lt;p&gt;&amp;ldquo;limits how much you can use&amp;rdquo;&lt;/p&gt;
+&lt;h4 id=&#34;11-cgroups-能力&#34;&gt;1.1 cgroups 能力&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;组织系统中的所有进程&lt;/li&gt;
+&lt;li&gt;负责收集资源使用信息&lt;/li&gt;
+&lt;li&gt;对资源使用进行限制或者区分优先级&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;12-subsystems&#34;&gt;1.2 Subsystems&lt;/h4&gt;
+&lt;p&gt;Control group 是一个抽象框架，Subsystems 是具体实现&lt;/p&gt;
+&lt;p&gt;subsystems 举例:
+&lt;figure style=&#34;flex-grow: 155; flex-basis: 374px&#34;&gt;
+		&lt;a href=&#34;https://hukx.site/posts/docker-virtual/2021-02-21-16-29-58.png&#34; data-size=&#34;647x415&#34;&gt;&lt;img src=&#34;https://hukx.site/posts/docker-virtual/2021-02-21-16-29-58.png&#34;
+				srcset=&#34;https://hukx.site/posts/docker-virtual/2021-02-21-16-29-58_hu4b814950657a071bd5f2f8c3b9bd9407_64316_480x0_resize_box_2.png 480w, https://hukx.site/posts/docker-virtual/2021-02-21-16-29-58_hu4b814950657a071bd5f2f8c3b9bd9407_64316_1024x0_resize_box_2.png 1024w&#34;
+				width=&#34;647&#34;
+				height=&#34;415&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-namespaces&#34;&gt;2. Namespaces&lt;/h3&gt;
+&lt;p&gt;&amp;ldquo;limits what you can see&amp;rdquo;&lt;/p&gt;
+&lt;h4 id=&#34;21-namespaces-能力&#34;&gt;2.1 Namespaces 能力&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;资源隔离的机制&lt;/li&gt;
+&lt;li&gt;在 namespace 内对资源的修改对当前 namespace 之外不可见&lt;/li&gt;
+&lt;li&gt;资源映射&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;22-可作-namespaces-的资源&#34;&gt;2.2 可作 namespaces 的资源&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Network&lt;/li&gt;
+&lt;li&gt;Filesystem (mounts)&lt;/li&gt;
+&lt;li&gt;Processes (pid)&lt;/li&gt;
+&lt;li&gt;Inter-process communication (ipc)&lt;/li&gt;
+&lt;li&gt;Hostname and domain name (uts)&lt;/li&gt;
+&lt;li&gt;User and groups IDs&lt;/li&gt;
+&lt;li&gt;cgroup&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;unshare&lt;/p&gt;
+&lt;h3 id=&#34;3-union-filesystem&#34;&gt;3. Union Filesystem&lt;/h3&gt;
+&lt;h4 id=&#34;31-copy-on-write&#34;&gt;3.1 copy-on-write&lt;/h4&gt;
+&lt;p&gt;&lt;figure style=&#34;flex-grow: 116; flex-basis: 280px&#34;&gt;
+		&lt;a href=&#34;https://hukx.site/posts/docker-virtual/2021-02-21-16-19-46.png&#34; data-size=&#34;592x506&#34;&gt;&lt;img src=&#34;https://hukx.site/posts/docker-virtual/2021-02-21-16-19-46.png&#34;
+				srcset=&#34;https://hukx.site/posts/docker-virtual/2021-02-21-16-19-46_huf0e84f6fb16558ef91eb06713fea7869_72406_480x0_resize_box_2.png 480w, https://hukx.site/posts/docker-virtual/2021-02-21-16-19-46_huf0e84f6fb16558ef91eb06713fea7869_72406_1024x0_resize_box_2.png 1024w&#34;
+				width=&#34;592&#34;
+				height=&#34;506&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;
+待补充&amp;hellip;&lt;/p&gt;
+&lt;h3 id=&#34;runtimes&#34;&gt;Runtimes&lt;/h3&gt;
+&lt;p&gt;用来管理配置 Linux 上述能力来在 host 上创建运行 containers 的软件工具  &lt;br&gt;
+&lt;figure style=&#34;flex-grow: 224; flex-basis: 538px&#34;&gt;
+		&lt;a href=&#34;https://hukx.site/posts/docker-virtual/2021-02-21-16-28-43.png&#34; data-size=&#34;550x245&#34;&gt;&lt;img src=&#34;https://hukx.site/posts/docker-virtual/2021-02-21-16-28-43.png&#34;
+				srcset=&#34;https://hukx.site/posts/docker-virtual/2021-02-21-16-28-43_hu96bc6dea89289c3ceeb9656ee7b66212_35659_480x0_resize_box_2.png 480w, https://hukx.site/posts/docker-virtual/2021-02-21-16-28-43_hu96bc6dea89289c3ceeb9656ee7b66212_35659_1024x0_resize_box_2.png 1024w&#34;
+				width=&#34;550&#34;
+				height=&#34;245&#34;
+				loading=&#34;lazy&#34;
+				&gt;
+		&lt;/a&gt;
+		
+	&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/sK5i-N34im8&#34;&gt;https://youtu.be/sK5i-N34im8&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/x1npPrzyKfs&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Linux Container Primitives - cgroups, namespaces, and more!&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt&#34;&gt;https://www.kernel.org/doc/Documentation/cgroup-v1/cgroups.txt&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://tech.meituan.com/2015/03/31/cgroups.html&#34;&gt;https://tech.meituan.com/2015/03/31/cgroups.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>图解 Kubernetes 架构</title>
         <link>https://hukx.site/posts/brief-intro-to-arch-of-k8s-with-pictures/</link>
         <pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate>
@@ -274,18 +369,6 @@ oracle
 &lt;li&gt;the actual representation of the data and associated logic&lt;/li&gt;
 &lt;li&gt;一个Model类对应数据库中的一张表，model的每个field对应数据表中的一列&lt;/li&gt;
 &lt;li&gt;ModelBases: 所有model的元类&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>图解 Docker 虚拟化</title>
-        <link>https://hukx.site/posts/docker-virtual/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>https://hukx.site/posts/docker-virtual/</guid>
-        <description>&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://youtu.be/sK5i-N34im8&#34;&gt;https://youtu.be/sK5i-N34im8&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
